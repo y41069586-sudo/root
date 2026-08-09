@@ -1519,6 +1519,196 @@ h4 {
   margin-bottom: var(--s-7);
 }
 
+/* ---------- Marken-Icon (echtes App-Icon) ---------- */
+.brand__icon {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(36, 28, 56, 0.14);
+}
+
+/* ---------- Zentrierter Hero mit Duo-Komposition ---------- */
+.hero--center {
+  text-align: center;
+}
+.hero__intro {
+  max-width: 44rem;
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+}
+.hero--center .hero__lead {
+  margin-inline: auto;
+}
+.hero--center .cta-row {
+  justify-content: center;
+  text-align: left;
+}
+.hero--center .cta-note {
+  line-height: 1.5;
+}
+
+/* ===== Scan → Pfeil → Routine ===== */
+.duo {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: var(--s-2);
+}
+.duo__phone {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-4);
+}
+.duo .phone {
+  --w: min(300px, 78vw);
+}
+.duo__label {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.duo__label--lead {
+  color: var(--violet-700);
+  background: var(--violet-100);
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--r-full);
+}
+.duo__arrow {
+  width: 96px;
+  color: var(--ink);
+  transform: rotate(64deg);
+  margin-block: var(--s-3);
+}
+.duo__arrow svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.duo__hint {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--s-6);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.duo__hint strong {
+  color: var(--ink);
+}
+
+@media (min-width: 940px) {
+  .duo {
+    grid-template-columns: auto minmax(120px, 190px) auto;
+    align-items: start;
+    gap: 0;
+  }
+  .duo .phone {
+    --w: 300px;
+  }
+  /* Wie in der Referenz: linkes Gerät tiefer, rechtes höher gesetzt. */
+  .duo__phone--a {
+    margin-top: 3.5rem;
+  }
+  .duo__arrow {
+    width: 100%;
+    transform: none;
+    margin-top: 11rem;
+    padding-inline: var(--s-4);
+  }
+}
+
+/* Der Pfeil zeichnet sich beim Einblenden. */
+.js .duo .duo__arrow-line,
+.js .duo .duo__arrow-head {
+  stroke-dasharray: var(--len, 400);
+  stroke-dashoffset: var(--len, 400);
+}
+.js .duo.is-visible .duo__arrow-line,
+.js .duo.is-visible .duo__arrow-head {
+  animation: draw 900ms var(--ease) forwards;
+}
+.js .duo.is-visible .duo__arrow-head {
+  animation-delay: 760ms;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- Der 14-Tage-Plan ---------- */
+.plan {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 600px) {
+  .plan {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1000px) {
+  .plan {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.plan__step {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-6);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.plan__step:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.plan__step::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  background: linear-gradient(90deg, var(--violet-400), var(--violet-600));
+}
+.plan__days {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--violet-700);
+  margin-bottom: var(--s-3);
+}
+.plan__step h3 {
+  font-size: var(--fs-h4);
+}
+.plan__step p {
+  margin-top: var(--s-3);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+/* ---------- Finale ---------- */
+.finale__icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 20px;
+  margin: 0 auto var(--s-5);
+  box-shadow: var(--shadow-md);
+}
+
 /* ---------- Fade-in beim Scrollen ---------- */
 .js .reveal {
   opacity: 0;

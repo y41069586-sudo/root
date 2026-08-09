@@ -15,7 +15,8 @@
     <meta property="og:url" content="https://glowe.app/impressum.html" />
     <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%237c57c8'/%3E%3Cpath d='M16 6c3.4 4.2 6.4 7.2 6.4 11a6.4 6.4 0 1 1-12.8 0c0-3.8 3-6.8 6.4-11z' fill='%23fff'/%3E%3C/svg%3E" />
+    <link rel="icon" href="assets/img/glowe-icon.png" />
+    <link rel="apple-touch-icon" href="assets/img/glowe-icon.png" />
   </head>
 
   <body>
@@ -24,24 +25,17 @@
     <header class="header">
       <div class="container header__inner">
         <a class="brand" href="index.html">
-          <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
-            <rect width="32" height="32" rx="9" fill="#7c57c8" />
-            <path d="M16 6c3.4 4.2 6.4 7.2 6.4 11a6.4 6.4 0 1 1-12.8 0c0-3.8 3-6.8 6.4-11z" fill="#fff" />
-            <circle cx="13.4" cy="18.4" r="1.7" fill="#7c57c8" opacity=".45" />
-          </svg>
+          <img class="brand__icon" src="assets/img/glowe-icon.png" alt="" width="36" height="36" />
           Glowé
         </a>
 
         <nav class="nav" aria-label="Main">
+          <a href="index.html#plan">The 14 days</a>
           <a href="index.html#how">How it works</a>
-          <a href="index.html#routine">Routine</a>
-          <a href="index.html#reviews">Reviews</a>
+          <a href="index.html#progress">Progress</a>
           <a href="support.html">Support</a>
         </nav>
 
-        <a class="appstore appstore--sm header__cta" href="https://apps.apple.com/app/id6787454842" target="_blank" rel="noopener">
-          <img src="assets/img/appstore-badge.svg" alt="Download Glowé on the App Store" width="126" height="42" />
-        </a>
 
         <button class="burger" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
           <span></span>
@@ -50,13 +44,10 @@
 
       <div class="container">
         <nav class="mobile-nav" id="mobile-nav" hidden aria-label="Mobile">
+          <a href="index.html#plan">The 14 days</a>
           <a href="index.html#how">How it works</a>
-          <a href="index.html#routine">Routine</a>
-          <a href="index.html#reviews">Reviews</a>
+          <a href="index.html#progress">Progress</a>
           <a href="support.html">Support</a>
-          <a class="appstore appstore--sm" href="https://apps.apple.com/app/id6787454842" target="_blank" rel="noopener">
-            <img src="assets/img/appstore-badge.svg" alt="Download Glowé on the App Store" width="126" height="42" />
-          </a>
         </nav>
       </div>
     </header>
@@ -205,14 +196,11 @@
         <div class="footer__grid">
           <div>
             <a class="brand" href="index.html">
-              <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
-                <rect width="32" height="32" rx="9" fill="#7c57c8" />
-                <path d="M16 6c3.4 4.2 6.4 7.2 6.4 11a6.4 6.4 0 1 1-12.8 0c0-3.8 3-6.8 6.4-11z" fill="#fff" />
-              </svg>
+              <img class="brand__icon" src="assets/img/glowe-icon.png" alt="" width="36" height="36" />
               Glowé
             </a>
             <p class="footer__tagline">
-              Your skin score in 30 seconds, and a 14-day routine built around it.
+              Scan your skin, get your 14-day routine — morning and evening, eased in gently.
             </p>
             <p style="margin-top: 1.25rem">
               <a class="appstore appstore--sm" href="https://apps.apple.com/app/id6787454842" target="_blank" rel="noopener">
@@ -224,9 +212,9 @@
           <div>
             <h4>Product</h4>
             <ul>
+              <li><a href="index.html#plan">The 14 days</a></li>
               <li><a href="index.html#how">How it works</a></li>
-              <li><a href="index.html#routine">14-day routine</a></li>
-              <li><a href="index.html#reviews">Reviews</a></li>
+              <li><a href="index.html#progress">Progress</a></li>
               <li><a href="index.html#faq">FAQ</a></li>
             </ul>
           </div>
@@ -253,9 +241,9 @@
         </div>
 
         <p class="footer__legal-note">
-          Glowé is a wellness and habit app. It does not provide medical advice, diagnosis or
-          treatment. If something on your skin worries you, changes quickly or hurts, please see a
-          doctor or dermatologist.
+          Glowé is a cosmetic and lifestyle product. Your score is an estimate, not a medical
+          diagnosis, and no substitute for seeing a dermatologist. If something on your skin worries
+          you, changes quickly or hurts, please see a doctor.
         </p>
 
         <div class="footer__bottom">

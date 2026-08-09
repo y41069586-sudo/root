@@ -277,6 +277,15 @@
     refresh();
   }
 
+  /* ---------- 7. Pfeil: echte Pfadlänge für die Zeichen-Animation ---------- */
+  function initArrow() {
+    var paths = document.querySelectorAll(".duo__arrow path");
+    Array.prototype.forEach.call(paths, function (path) {
+      var len = Math.ceil(path.getTotalLength());
+      path.style.setProperty("--len", len);
+    });
+  }
+
   /* ---------- Start ---------- */
   function boot() {
     initHeader();
@@ -285,6 +294,7 @@
     initTabs();
     initSkinScreen();
     initRoutineScreen();
+    initArrow();
     var year = document.querySelectorAll("[data-year]");
     year.forEach(function (el) {
       el.textContent = new Date().getFullYear();
