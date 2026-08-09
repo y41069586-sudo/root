@@ -1,0 +1,9 @@
+# Lokaler Netlify-CLI-State (enthält die Site-ID, gehört nicht ins Repo)
+.netlify/
+
+# Abhängigkeiten und Build-Artefakte
+node_modules/
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
