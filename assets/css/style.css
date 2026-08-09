@@ -1567,6 +1567,12 @@ h4 {
 .duo .phone {
   --w: min(300px, 78vw);
 }
+.duo__shot {
+  width: min(300px, 78vw);
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(36, 28, 56, 0.06))
+    drop-shadow(0 24px 52px rgba(124, 87, 200, 0.2));
+}
 .duo__label {
   font-size: var(--fs-xs);
   font-weight: 700;

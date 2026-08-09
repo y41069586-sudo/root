@@ -151,210 +151,16 @@
 
           <!-- ---------- Scan → Pfeil → Routine ---------- -->
           <div class="duo reveal">
-            <!-- ===== Telefon A: der Scan ===== -->
+            <!-- ===== Telefon A: der Scan (echter App-Screen) ===== -->
             <div class="duo__phone duo__phone--a">
               <p class="duo__label">1 · Scan</p>
-              <div class="phone" data-skin-screen>
-                <span class="phone__side phone__side--l1" aria-hidden="true"></span>
-                <span class="phone__side phone__side--l2" aria-hidden="true"></span>
-                <span class="phone__side phone__side--l3" aria-hidden="true"></span>
-                <span class="phone__side phone__side--r" aria-hidden="true"></span>
-
-                <div class="phone__frame">
-                  <span class="phone__island" aria-hidden="true"></span>
-                  <div class="phone__screen">
-                    <div class="statusbar">
-                      <span>9:41</span>
-                      <span class="statusbar__icons" aria-hidden="true">
-                        <svg viewBox="0 0 18 12">
-                          <rect x="0" y="8" width="3" height="4" rx="1" />
-                          <rect x="5" y="5.5" width="3" height="6.5" rx="1" />
-                          <rect x="10" y="3" width="3" height="9" rx="1" />
-                          <rect x="15" y="0" width="3" height="12" rx="1" />
-                        </svg>
-                        <svg viewBox="0 0 16 12">
-                          <path
-                            d="M8 11.2 5.6 8.6a3.4 3.4 0 0 1 4.8 0L8 11.2Zm-4.2-4.5-1.6-1.8a8.6 8.6 0 0 1 11.6 0l-1.6 1.8a6.2 6.2 0 0 0-8.4 0Z"
-                          />
-                        </svg>
-                        <svg viewBox="0 0 26 12">
-                          <rect
-                            x="0.5"
-                            y="0.5"
-                            width="22"
-                            height="11"
-                            rx="3.2"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-opacity=".35"
-                          />
-                          <rect x="2" y="2" width="17" height="8" rx="2" />
-                          <path d="M24 4.2v3.6a2 2 0 0 0 0-3.6Z" opacity=".4" />
-                        </svg>
-                      </span>
-                    </div>
-
-                    <div class="screen">
-                      <div>
-                        <p class="screen__title">Your skin analysis</p>
-                        <p class="screen__sub">
-                          A reading of you — with your 14-day potential.
-                        </p>
-                      </div>
-
-                      <div
-                        class="seg"
-                        data-active="0"
-                        role="tablist"
-                        aria-label="Timeframe"
-                      >
-                        <span class="seg__thumb" aria-hidden="true"></span>
-                        <button
-                          class="seg__btn"
-                          type="button"
-                          role="tab"
-                          aria-selected="true"
-                        >
-                          Now
-                        </button>
-                        <button
-                          class="seg__btn"
-                          type="button"
-                          role="tab"
-                          aria-selected="false"
-                          tabindex="-1"
-                        >
-                          In 14 days
-                        </button>
-                      </div>
-
-                      <div>
-                        <div class="face">
-                          <svg
-                            viewBox="0 0 100 100"
-                            role="img"
-                            aria-label="Your scan"
-                          >
-                            <defs>
-                              <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0" stop-color="#f4ded2" />
-                                <stop offset="1" stop-color="#e6c6b4" />
-                              </linearGradient>
-                            </defs>
-                            <rect width="100" height="100" fill="#ede6fa" />
-                            <path
-                              d="M50 96c-19 0-31-9-31-9 2-13 12-18 20-21h22c8 3 18 8 20 21 0 0-12 9-31 9Z"
-                              fill="#2f2648"
-                            />
-                            <path
-                              d="M50 18c14 0 22 9 22 24 0 16-10 30-22 30S28 58 28 42c0-15 8-24 22-24Z"
-                              fill="url(#skin)"
-                            />
-                            <path
-                              d="M50 14c13 0 23 7 23 19 0 4-1 7-2 9-1-7-3-11-7-13-5 3-23 4-28-1-3 2-5 7-6 14-1-2-2-5-2-9 0-12 9-19 22-19Z"
-                              fill="#4a3a2c"
-                            />
-                            <circle cx="41" cy="43" r="2.1" fill="#3c3350" />
-                            <circle cx="59" cy="43" r="2.1" fill="#3c3350" />
-                            <path
-                              d="M45 57c3 2 7 2 10 0"
-                              stroke="#c98d80"
-                              stroke-width="2"
-                              fill="none"
-                              stroke-linecap="round"
-                            />
-                            <g fill="#d98a86" opacity=".72">
-                              <circle cx="36" cy="35" r="1.5" />
-                              <circle cx="64" cy="33" r="1.3" />
-                              <circle cx="67" cy="46" r="1.6" />
-                              <circle cx="34" cy="50" r="1.4" />
-                              <circle cx="57" cy="63" r="1.5" />
-                              <circle cx="44" cy="30" r="1.2" />
-                              <circle cx="52" cy="49" r="1.3" />
-                            </g>
-                          </svg>
-                        </div>
-
-                        <div class="screen__card">
-                          <div class="scores">
-                            <div class="score score--lead" data-score="overall">
-                              <p class="score__label">Overall</p>
-                              <p class="score__value">56</p>
-                              <div class="score__bar">
-                                <span class="score__fill"></span>
-                              </div>
-                            </div>
-                            <div class="score" data-score="texture">
-                              <p class="score__label">Texture</p>
-                              <p class="score__value">55</p>
-                              <div class="score__bar">
-                                <span class="score__fill"></span>
-                              </div>
-                            </div>
-                            <div class="score" data-score="redness">
-                              <p class="score__label">Redness</p>
-                              <p class="score__value">52</p>
-                              <div class="score__bar">
-                                <span class="score__fill"></span>
-                              </div>
-                            </div>
-                            <div class="score" data-score="pores">
-                              <p class="score__label">Pores</p>
-                              <p class="score__value">57</p>
-                              <div class="score__bar">
-                                <span class="score__fill"></span>
-                              </div>
-                            </div>
-                            <div class="score" data-score="evenness">
-                              <p class="score__label">Evenness</p>
-                              <p class="score__value">58</p>
-                              <div class="score__bar">
-                                <span class="score__fill"></span>
-                              </div>
-                            </div>
-                            <div class="score" data-score="glow">
-                              <p class="score__label">Glow</p>
-                              <p class="score__value">60</p>
-                              <div class="score__bar">
-                                <span class="score__fill"></span>
-                              </div>
-                            </div>
-                            <div class="score" data-score="hydration">
-                              <p class="score__label">Hydration</p>
-                              <p class="score__value">59</p>
-                              <div class="score__bar">
-                                <span class="score__fill"></span>
-                              </div>
-                            </div>
-                            <div class="score" data-score="blemishes">
-                              <p class="score__label">Blemishes</p>
-                              <p class="score__value">50</p>
-                              <div class="score__bar">
-                                <span class="score__fill"></span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <p class="screen__foot">
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                              <circle cx="12" cy="12" r="11" fill="#ede6fa" />
-                              <path
-                                d="M12 17V8m0 0-3.4 3.4M12 8l3.4 3.4"
-                                stroke="#6743a8"
-                                stroke-width="2"
-                                fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              />
-                            </svg>
-                            Every score runs 0–100 — higher is always better.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <img
+                class="duo__shot"
+                src="assets/img/scan-phone.webp"
+                width="780"
+                height="1631"
+                alt="Glowé skin analysis screen: overall 56, texture 55, redness 52, pores 57, evenness 58, glow 60, hydration 59, blemishes 50, and a standing of top 61 per cent."
+              />
             </div>
 
             <!-- ===== Der Pfeil ===== -->
@@ -369,7 +175,8 @@
                 />
                 <path
                   class="duo__arrow-head"
-                  d="M176 92c6 12 11 20 16 27-9-1-18-2-28 0"
+                  d="M193 86 192 108 172 97"
+                  fill="none"
                   stroke="var(--ink)"
                   stroke-width="4"
                   stroke-linecap="round"
@@ -543,8 +350,8 @@
           </div>
 
           <p class="duo__hint reveal">
-            Both phones are live — tap <strong>In 14 days</strong> on the left,
-            or check off a step on the right.
+            Left: the analysis, straight from the app. Right: your plan — it's
+            live, so check off a step or pick another day.
           </p>
         </div>
       </section>
