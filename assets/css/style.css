@@ -1106,17 +1106,17 @@ h4 {
   text-align: center;
 }
 .shot__icon {
-  width: 64px;
-  height: 64px;
+  width: 76px;
+  height: 76px;
   margin: 0 auto var(--s-4);
-  border-radius: var(--r-md);
+  border-radius: 22px;
   background: var(--violet-600);
   display: grid;
   place-items: center;
 }
 .shot__icon svg {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   stroke: #fff;
   fill: none;
   stroke-width: 1.8;
