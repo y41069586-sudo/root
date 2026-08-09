@@ -286,6 +286,30 @@
     });
   }
 
+  /* ---------- 8. App-Store-Links in In-App-Browsern ----------
+     TikTok, Instagram & Co. öffnen kein zweites Fenster: ein Klick auf einen
+     Link mit target="_blank" endet dort in „Action cannot be completed".
+     Deshalb navigieren wir im obersten Fenster — iOS reicht den Universal
+     Link dann an den App Store weiter. */
+  function initAppStore() {
+    var links = document.querySelectorAll("[data-appstore]");
+    if (!links.length) return;
+
+    Array.prototype.forEach.call(links, function (link) {
+      link.addEventListener("click", function (e) {
+        // Auf dem Desktop soll Cmd/Ctrl/Shift-Klick weiter einen Tab öffnen.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+        e.preventDefault();
+        var url = link.href;
+        try {
+          window.top.location.href = url;
+        } catch (err) {
+          window.location.href = url;
+        }
+      });
+    });
+  }
+
   /* ---------- Start ---------- */
   function boot() {
     initHeader();
@@ -295,6 +319,7 @@
     initSkinScreen();
     initRoutineScreen();
     initArrow();
+    initAppStore();
     var year = document.querySelectorAll("[data-year]");
     year.forEach(function (el) {
       el.textContent = new Date().getFullYear();
