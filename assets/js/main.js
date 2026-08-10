@@ -287,25 +287,134 @@
   }
 
   /* ---------- 8. App-Store-Links in In-App-Browsern ----------
-     TikTok, Instagram & Co. öffnen kein zweites Fenster: ein Klick auf einen
-     Link mit target="_blank" endet dort in „Action cannot be completed".
-     Deshalb navigieren wir im obersten Fenster — iOS reicht den Universal
-     Link dann an den App Store weiter. */
+     apps.apple.com beantwortet iOS-Clients mit 301 auf itms-appss:// .
+     Safari kennt dieses Schema und übergibt an den App Store; die WebViews
+     von TikTok, Instagram & Co. kennen es nicht — dort endet jeder Klick in
+     „The action couldn't be completed". Ein anderer URL-Aufbau hilft nicht,
+     Apple leitet in allen Varianten auf das Schema um, und Schema-Tricks wie
+     x-safari-https:// hinterlassen eine hängende Navigation, die die Seite
+     für weitere Eingaben blockiert.
+
+     Aus einer solchen WebView führt nur der Systembrowser. Also zeigen wir
+     dort statt eines Fehlers direkt den Weg dorthin. */
+
+  function isIOS() {
+    var ua = navigator.userAgent || "";
+    return (
+      /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    );
+  }
+
+  function isInAppBrowser() {
+    var ua = navigator.userAgent || "";
+    // Echte Browser (CriOS, FxiOS, Safari) sind hier bewusst nicht dabei.
+    return /musical_ly|Trill|BytedanceWebview|TikTok|Instagram|FBAN|FBAV|FB_IAB|Snapchat|Pinterest|LinkedInApp|Line\//i.test(
+      ua
+    );
+  }
+
+  function buildEscapeSheet(url) {
+    var sheet = document.createElement("div");
+    sheet.className = "escape";
+    sheet.setAttribute("role", "dialog");
+    sheet.setAttribute("aria-modal", "true");
+    sheet.setAttribute("aria-labelledby", "escape-title");
+
+    var card = document.createElement("div");
+    card.className = "escape__card";
+
+    var title = document.createElement("h2");
+    title.className = "escape__title";
+    title.id = "escape-title";
+    title.textContent = "Open in Safari to continue";
+
+    var body = document.createElement("p");
+    body.className = "escape__body";
+    body.textContent =
+      "The TikTok and Instagram browsers can’t open the App Store. Tap the " +
+      "••• menu at the edge of the screen, choose “Open in browser”, then tap " +
+      "the download button again — or copy the link and paste it into Safari.";
+
+    var actions = document.createElement("div");
+    actions.className = "escape__actions";
+
+    var copy = document.createElement("button");
+    copy.type = "button";
+    copy.className = "escape__btn escape__btn--primary";
+    copy.textContent = "Copy App Store link";
+    copy.addEventListener("click", function () {
+      function done() {
+        copy.textContent = "Link copied";
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(done, function () {
+          legacyCopy(url);
+          done();
+        });
+      } else {
+        legacyCopy(url);
+        done();
+      }
+    });
+
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "escape__btn";
+    close.textContent = "Close";
+    close.addEventListener("click", function () {
+      sheet.remove();
+    });
+
+    actions.appendChild(copy);
+    actions.appendChild(close);
+    card.appendChild(title);
+    card.appendChild(body);
+    card.appendChild(actions);
+    sheet.appendChild(card);
+
+    sheet.addEventListener("click", function (e) {
+      if (e.target === sheet) sheet.remove();
+    });
+
+    return sheet;
+  }
+
+  function legacyCopy(text) {
+    var input = document.createElement("textarea");
+    input.value = text;
+    input.setAttribute("readonly", "");
+    input.style.position = "fixed";
+    input.style.opacity = "0";
+    document.body.appendChild(input);
+    input.select();
+    try {
+      document.execCommand("copy");
+    } catch (err) {
+      /* Dann bleibt der Nutzer beim Menüweg. */
+    }
+    document.body.removeChild(input);
+  }
+
+  function showEscapeSheet(url) {
+    if (document.querySelector(".escape")) return;
+    var sheet = buildEscapeSheet(url);
+    document.body.appendChild(sheet);
+    var first = sheet.querySelector("button");
+    if (first) first.focus();
+  }
+
   function initAppStore() {
     var links = document.querySelectorAll("[data-appstore]");
     if (!links.length) return;
 
+    // Überall sonst ist der Link ohne Zutun korrekt — nicht anfassen.
+    if (!isIOS() || !isInAppBrowser()) return;
+
     Array.prototype.forEach.call(links, function (link) {
       link.addEventListener("click", function (e) {
-        // Auf dem Desktop soll Cmd/Ctrl/Shift-Klick weiter einen Tab öffnen.
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
         e.preventDefault();
-        var url = link.href;
-        try {
-          window.top.location.href = url;
-        } catch (err) {
-          window.location.href = url;
-        }
+        showEscapeSheet(link.href);
       });
     });
   }
