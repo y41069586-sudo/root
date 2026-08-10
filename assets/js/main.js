@@ -288,15 +288,15 @@
 
   /* ---------- 8. App-Store-Links in In-App-Browsern ----------
      apps.apple.com beantwortet iOS-Clients mit 301 auf itms-appss:// .
-     Safari kennt dieses Schema und übergibt an den App Store; die WebViews
-     von TikTok, Instagram & Co. kennen es nicht — dort endet jeder Klick in
-     „The action couldn't be completed". Ein anderer URL-Aufbau hilft nicht,
-     Apple leitet in allen Varianten auf das Schema um, und Schema-Tricks wie
-     x-safari-https:// hinterlassen eine hängende Navigation, die die Seite
-     für weitere Eingaben blockiert.
+     Die WebViews von TikTok, Instagram & Co. reichen dieses Schema meistens
+     an den App Store weiter — nur bei target="_blank" nicht, dort endet der
+     Klick in „The action couldn't be completed". Das Attribut ist deshalb
+     überall entfernt, und der normale Sprung bleibt der Regelfall.
 
-     Aus einer solchen WebView führt nur der Systembrowser. Also zeigen wir
-     dort statt eines Fehlers direkt den Weg dorthin. */
+     Scheitert er trotzdem, bleibt die Seite sichtbar. Dann — und nur dann —
+     zeigen wir den Weg über den Systembrowser. Ein aktives Erzwingen per
+     x-safari-https:// wäre schlechter: das hinterlässt eine hängende
+     Navigation, die alle weiteren Taps schluckt. */
 
   function isIOS() {
     var ua = navigator.userAgent || "";
@@ -327,14 +327,21 @@
     var title = document.createElement("h2");
     title.className = "escape__title";
     title.id = "escape-title";
-    title.textContent = "Open in Safari to continue";
+    title.textContent = "Couldn’t open the App Store";
 
     var body = document.createElement("p");
     body.className = "escape__body";
     body.textContent =
-      "The TikTok and Instagram browsers can’t open the App Store. Tap the " +
-      "••• menu at the edge of the screen, choose “Open in browser”, then tap " +
-      "the download button again — or copy the link and paste it into Safari.";
+      "This in-app browser blocked the jump. Tap the ••• menu at the edge of " +
+      "the screen and choose “Open in browser”, then tap the download button " +
+      "again — or copy the link and paste it into Safari.";
+
+    // Die URL steht sichtbar da: falls die WebView nach der abgelehnten
+    // Navigation keine Taps mehr annimmt, bleibt sie per Langdruck kopierbar
+    // und der Anleitungstext oben funktioniert ohnehin ohne Interaktion.
+    var link = document.createElement("p");
+    link.className = "escape__url";
+    link.textContent = url;
 
     var actions = document.createElement("div");
     actions.className = "escape__actions";
@@ -370,6 +377,7 @@
     actions.appendChild(close);
     card.appendChild(title);
     card.appendChild(body);
+    card.appendChild(link);
     card.appendChild(actions);
     sheet.appendChild(card);
 
@@ -412,9 +420,33 @@
     if (!isIOS() || !isInAppBrowser()) return;
 
     Array.prototype.forEach.call(links, function (link) {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        showEscapeSheet(link.href);
+      link.addEventListener("click", function () {
+        // Bewusst kein preventDefault: der Link soll ganz normal springen.
+        var url = link.href;
+        var cancelled = false;
+
+        function onVisibility() {
+          if (document.visibilityState === "hidden") cancel();
+        }
+        function cancel() {
+          cancelled = true;
+          window.clearTimeout(timer);
+          window.removeEventListener("pagehide", cancel);
+          window.removeEventListener("blur", cancel);
+          document.removeEventListener("visibilitychange", onVisibility);
+        }
+
+        // Öffnet sich der App Store, geht diese Seite in den Hintergrund —
+        // je nach WebView über pagehide, visibilitychange oder blur.
+        window.addEventListener("pagehide", cancel);
+        window.addEventListener("blur", cancel);
+        document.addEventListener("visibilitychange", onVisibility);
+
+        var timer = window.setTimeout(function () {
+          if (cancelled || document.visibilityState !== "visible") return;
+          cancel();
+          showEscapeSheet(url);
+        }, 2000);
       });
     });
   }

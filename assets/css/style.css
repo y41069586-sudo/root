@@ -1781,11 +1781,25 @@ h4 {
   line-height: var(--lh-body);
   color: var(--muted);
 }
+.escape__url {
+  margin-top: var(--s-4);
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--bg);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--violet-700);
+  overflow-wrap: anywhere;
+  /* Per Langdruck komplett markierbar, auch ohne funktionierenden Button. */
+  -webkit-user-select: all;
+  user-select: all;
+}
 .escape__actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-2);
-  margin-top: var(--s-5);
+  margin-top: var(--s-4);
 }
 .escape__btn {
   flex: 1 1 auto;
